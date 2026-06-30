@@ -1,0 +1,409 @@
+/* GameMapBlock Specific Styles
+   Styles specific to GameMapBlock component */
+
+@use "sass:color";
+@use 'variables' as *;
+
+// Game map header now uses universal .block-header-with-status style
+
+.settings-container {
+  position: relative;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background $transition-fast;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: #eeeeee;
+  }
+  
+  &.active {
+    background: #e0e0e0;
+  }
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 16px;
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  min-width: 200px;
+  z-index: 10000;
+  
+  .settings-section {
+    margin-bottom: 12px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: $text-primary;
+    }
+  }
+}
+
+.switch-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: $text-primary;
+  
+  .switch-input {
+    display: none;
+  }
+  
+  .switch-slider {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 20px;
+    margin-right: 8px;
+    transition: background $transition-fast;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: transform $transition-fast;
+    }
+  }
+  
+  .switch-input:checked + .switch-slider {
+    background: $primary-color;
+    
+    &::before {
+      transform: translateX(20px);
+    }
+  }
+}
+
+.zoom-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.zoom-btn {
+  background: #6c757d;
+  color: white;
+  border: 1px solid #5a6268;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+  
+  &:hover:not(:disabled) {
+    background: #5a6268;
+    border-color: #495057;
+  }
+  
+  &:disabled {
+    background: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.zoom-level {
+  font-size: 14px;
+  color: $text-primary;
+  min-width: 50px;
+  text-align: center;
+}
+
+.reset-zoom-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background: color.adjust(#6c757d, $lightness: -10%);
+  }
+}
+
+.map-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.map-controls .btn-secondary.active {
+  background: $primary-color;
+  color: white;
+}
+
+.map-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: white; /* Changed from #f0f0f0 to white */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-map--player1-turn .map-container {
+  background:
+    linear-gradient(
+      to top,
+      #ffffff 0%,
+      #ffffff 46%,
+      rgba(61, 168, 255, 0.16) 70%,
+      rgba(61, 168, 255, 0.16) 100%
+    );
+}
+
+.game-map--player2-turn .map-container {
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #ffffff 46%,
+      rgba(244, 67, 54, 0.08) 70%,
+      rgba(244, 67, 54, 0.2) 100%
+    );
+}
+
+.hex-map-svg {
+  cursor: grab;
+  width: 100%;
+  height: 100%;
+  
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.hex-cell {
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &.out-of-range {
+    opacity: 0.5;
+    filter: grayscale(70%);
+  }
+}
+
+.hex-inner-stroke {
+  pointer-events: none;
+}
+
+// Mouse-driven hover outline (#61): rendered for every hex but hidden until its
+// hex group is `:hover`ed. Replaces the old reactive `hoveredHex` write so
+// crossing hexes no longer re-renders the whole map. Mirrors HexMapEditorCanvas's
+// CSS-hover pattern. The programmatic `.hover-stroke` (sidebar preview intent) is
+// unaffected — it is mounted via `v-if` and stays visible whenever present.
+.hex-hover-outline {
+  opacity: 0;
+  // No transition here: if it were on the base rule it would run (queue+cancel)
+  // on every hex crossing during a pan, even though `.panning` suppresses the
+  // visible change. The transition lives on the activating rule instead so it
+  // only fires when the outline actually becomes visible.
+}
+
+// Transition fires only when the outline activates (not suppressed, not panning).
+// `:not(.hex-hover-outline--suppressed)` prevents the CSS outline from showing
+// when the programmatic `.hover-stroke` (v-if) is already rendering for the
+// same hex — the two identical strokes would compound to ~84% opacity otherwise.
+.hex-group:hover .hex-hover-outline:not(.hex-hover-outline--suppressed) {
+  opacity: 1;
+  transition: opacity $transition-fast;
+}
+
+// Suppress mouse-hover while panning (the old code gated the hover write on
+// `isPanning`). `.panning` toggles on the hex-map group only at pan start/end.
+// This rule wins over the activating rule above via specificity, so no
+// transition runs during a pan — the selector above never matches anyway when
+// panning because `.panning` is already set.
+.hex-map-group.panning .hex-group:hover .hex-hover-outline {
+  opacity: 0;
+}
+
+.move-forward-target-stroke {
+  fill: #0000001e;
+  stroke: #000000;
+  stroke-width: 4;
+  animation: pulse-black 1s ease-in-out infinite;
+}
+
+.attack-range-contour-path {
+  fill: none;
+  pointer-events: none;
+  stroke: #b00020;
+  stroke-dasharray: 7 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-opacity: 0.9;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 3px rgba(176, 0, 32, 0.55));
+}
+
+.attack-target-selected-stroke {
+  fill: #ff525240;
+  stroke: #ffeb3b;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 5px rgba(255, 82, 82, 0.85));
+}
+
+@keyframes pulse-black {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hex-coordinates {
+  font-size: 12px;
+  fill: $text-primary;
+  text-anchor: middle;
+  pointer-events: none;
+  font-family: 'Courier New', monospace;
+  
+  &.out-of-range {
+    opacity: 0.4;
+  }
+}
+
+.map-loading,
+.no-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: $text-muted;
+}
+
+.map-loading {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.no-map-content {
+  text-align: center;
+  
+  h4 {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: $font-weight-medium;
+    line-height: 1.35;
+    color: $text-primary;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: $text-secondary;
+  }
+}
+
+.hex-info-overlay {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+.hex-info-card {
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  position: relative;
+  
+  h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: $text-primary;
+  }
+}
+
+.hex-info-content {
+  p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: $text-muted;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    strong {
+      color: $text-primary;
+    }
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: $text-muted;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  
+  &:hover {
+    background: #f0f0f0;
+    color: $text-primary;
+  }
+}
+
+// Rotation controls styles moved to universal-components.scss
+
+// ============================================
+// Overlay Styles (Spawn Points & Bases)
+// ============================================
+// Note: CSS variables for overlays are defined globally in App.vue
+
+// Overlay styles are now defined globally in App.vue

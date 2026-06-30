@@ -1,0 +1,66 @@
+// Level Builder page styles. Page-level shell (header, stepper slot,
+// step workspace). The workspace is a single column - each step
+// component owns its own internal layout (e.g. `MapBuilderStep` does
+// canvas + tools side-by-side). Stepper internals live in the scoped
+// block of `src/components/level-builder/LevelBuilderStepper.vue`.
+@use 'variables' as *;
+
+.level-builder {
+  min-height: 100vh;
+  background-color: $background-color;
+  color: $text-primary;
+}
+
+.level-builder-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: $panel-padding;
+  display: flex;
+  flex-direction: column;
+  gap: $panel-gap;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: $font-size-medium;
+    color: $text-muted;
+  }
+
+  &__workspace {
+    display: flex;
+    flex-direction: column;
+    gap: $panel-gap;
+  }
+
+  &__step-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__step-title {
+    margin: 0;
+    font-size: $font-size-xlarge;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+  }
+
+  &__step-hint {
+    margin: 0;
+    font-size: $font-size-medium;
+    color: $text-secondary;
+  }
+
+}

@@ -1,0 +1,78 @@
+{
+  "Our_operations": [
+    {
+      "title": "MANOEUVRE",
+      "comment": "How player moves.",
+      "moves": [
+        {
+          "title": "x1 dice",
+          "comment": "-",
+          "dice": [
+            ["move","turn","reverse"],
+            ["move","turn"],
+            ["move","turn"],
+            ["turn","reverse"],
+            ["turn"],
+            ["turn","reverse"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ATTACK",
+      "comment": "How player attacks.",
+      "moves": [
+        {
+          "title": "x1 dice",
+          "comment": "-",
+          "dice": [
+            ["fire","reload"],
+            ["reload"],
+            ["-"],
+            ["-"],
+            ["fire"],
+            ["fire","reload"]
+          ]
+        }
+      ]
+    }
+  ],
+  "Enemy_operations": [
+    {
+      "title": "MANOEUVRE",
+      "comment": "How player moves.",
+      "moves": [
+        {
+          "title": "x1 dice",
+          "comment": "-",
+          "dice": [
+            ["move","turn","reverse"],
+            ["move","turn"],
+            ["move","turn"],
+            ["turn","reverse"],
+            ["turn"],
+            ["turn","reverse"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ATTACK",
+      "comment": "How player attacks.",
+      "moves": [
+        {
+          "title": "x1 dice",
+          "comment": "-",
+          "dice": [
+            ["fire","reload"],
+            ["reload"],
+            ["-"],
+            ["-"],
+            ["fire"],
+            ["fire","reload"]
+          ]
+        }
+      ]
+    }
+  ]
+}

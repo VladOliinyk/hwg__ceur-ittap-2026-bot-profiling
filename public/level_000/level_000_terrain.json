@@ -1,0 +1,46 @@
+{
+  "terrainTypes": [
+    {
+      "id": "plains",
+      "name": "Plains",
+      "color": "#4CAF50",
+      "description": "Basic grassland terrain",
+      "terrainDifficulty": 0
+    },
+    {
+      "id": "forest",
+      "name": "Forest",
+      "color": "#2E7D32",
+      "description": "Dense woodland areas",
+      "terrainDifficulty": 1
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "color": "#2196F3",
+      "description": "Rivers, lakes, and coastal areas",
+      "terrainDifficulty": 2
+    },
+    {
+      "id": "mountain",
+      "name": "Mountain",
+      "color": "#795548",
+      "description": "High elevation rocky terrain",
+      "terrainDifficulty": 10
+    },
+    {
+      "id": "desert",
+      "name": "Desert",
+      "color": "#FFC107",
+      "description": "Arid sandy regions",
+      "terrainDifficulty": 1
+    },
+    {
+      "id": "swamp",
+      "name": "Swamp",
+      "color": "#556B2F",
+      "description": "Wet, marshy lowlands with dense vegetation",
+      "terrainDifficulty": 2
+    }
+  ]
+}

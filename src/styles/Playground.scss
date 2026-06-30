@@ -1,0 +1,321 @@
+// Playground Grid Layout Styles
+// Reusable grid system for complex layouts
+
+@use 'variables' as *;
+@use 'components' as *;
+@use 'resizable-splitter' as *;
+
+// Grid Layout Variables
+$grid-gap: 16px;
+$grid-border-radius: 8px;
+$grid-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+$grid-background: #ffffff;
+$grid-border: 1px solid #e0e0e0;
+$grid-splitter-size: $grid-gap;
+
+// Grid Container
+.playground-grid {
+  --playground-grid-splitter-size: #{$grid-splitter-size};
+  display: grid;
+  position: relative;
+  grid-template-columns:
+    minmax(240px, var(--layout-engine-width, 20fr))
+    var(--playground-grid-splitter-size)
+    minmax(280px, var(--layout-moves-width, 30fr))
+    var(--playground-grid-splitter-size)
+    minmax(320px, var(--layout-map-width, 33fr))
+    var(--playground-grid-splitter-size)
+    minmax(180px, var(--layout-selection-width, 17fr));
+  grid-template-rows:
+    minmax(0, var(--layout-main-height, 2fr))
+    var(--playground-grid-splitter-size)
+    minmax(220px, var(--layout-timeline-height, 1fr));
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+  padding: $grid-gap;
+  background-color: #f5f5f5;
+  
+  // Grid Areas - engine + turntable on the left, map and selection full-height on the right.
+  grid-template-areas: 
+    "game-engine splitter-engine-moves moves-table splitter-moves-map game-map splitter-map-selection selection"
+    "splitter-main-timeline splitter-main-timeline splitter-main-timeline splitter-moves-map game-map splitter-map-selection selection"
+    "timeline timeline timeline splitter-moves-map game-map splitter-map-selection selection";
+}
+
+// Grid Items Base Styles
+.grid-item {
+  background: $grid-background;
+  border: $grid-border;
+  border-radius: $grid-border-radius;
+  box-shadow: $grid-shadow;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  
+  transition: box-shadow 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Specific Grid Areas
+.grid-item--moves-table {
+  grid-area: moves-table;
+}
+
+.grid-item--game-map {
+  grid-area: game-map;
+  position: relative;
+}
+
+.grid-item--timeline {
+  grid-area: timeline;
+  // min-height: 120px;
+}
+
+.grid-item--moves-list {
+  grid-area: game-engine;
+}
+
+.grid-item--selection {
+  grid-area: selection;
+}
+
+// Base splitter visuals (.playground-splitter, --vertical/--horizontal, __icon)
+// live in styles/_resizable-splitter.scss and are shared with Automated Playground.
+// Only Playground-specific grid-area placement remains here.
+
+.playground-splitter--engine-moves {
+  grid-area: splitter-engine-moves;
+}
+
+.playground-splitter--moves-map {
+  grid-area: splitter-moves-map;
+}
+
+.playground-splitter--map-selection {
+  grid-area: splitter-map-selection;
+}
+
+.playground-splitter--main-timeline {
+  grid-area: splitter-main-timeline;
+}
+
+// Tab System Styles (Reusable)
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tab-header {
+  display: flex;
+  background: #f8f9fa;
+  border-bottom: $grid-border;
+  
+  .tab-button {
+    flex: 1;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    
+    &:hover {
+      background: #e9ecef;
+      color: #333;
+    }
+    
+    &.active {
+      color: #4CAF50;
+      border-bottom-color: #4CAF50;
+      background: white;
+    }
+    
+    &:first-child {
+      border-top-left-radius: $grid-border-radius;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $grid-border-radius;
+    }
+  }
+}
+
+.tab-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  
+  &.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+  }
+}
+
+// Content Area Styles
+.content-header {
+  margin-bottom: 16px;
+  
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+// Button Styles (Reusable) - Using existing button system
+.btn-primary {
+  @extend .btn !optional;
+  background: $primary-color;
+  color: white;
+  
+  &:hover {
+    background: $primary-hover;
+    transform: translateY(-1px);
+  }
+  
+  &:disabled {
+    background: $disabled-background;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+
+// File Input Styles
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+  
+  input[type="file"] {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+}
+
+// Loading States
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive Design
+@media (max-width: 1400px) {
+  .playground-grid {
+    grid-template-columns:
+      minmax(240px, var(--layout-engine-width, 30fr))
+      var(--playground-grid-splitter-size)
+      minmax(280px, var(--layout-moves-width, 30fr))
+      var(--playground-grid-splitter-size)
+      minmax(320px, var(--layout-map-width, 25fr))
+      var(--playground-grid-splitter-size)
+      minmax(180px, var(--layout-selection-width, 15fr));
+    grid-template-areas: 
+      "game-engine splitter-engine-moves moves-table splitter-moves-map game-map splitter-map-selection selection"
+      "splitter-main-timeline splitter-main-timeline splitter-main-timeline splitter-moves-map game-map splitter-map-selection selection"
+      "timeline timeline timeline splitter-moves-map game-map splitter-map-selection selection";
+  }
+}
+
+@media (max-width: 1200px) {
+  .playground-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-auto-rows: auto;
+    align-items: start;
+    align-content: start;
+    flex: 0 0 auto;
+    gap: $grid-gap;
+    min-height: auto;
+    overflow: visible;
+    grid-template-areas: 
+      "game-engine moves-table"
+      "game-map selection"
+      "timeline timeline";
+  }
+
+  .playground-splitter {
+    display: none;
+  }
+
+  .playground .playground-grid .grid-item {
+    align-self: start;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .playground .playground-grid .tab-container,
+  .playground .playground-grid .content-container,
+  .playground .playground-grid .content-container-flex,
+  .playground .playground-grid .table-view-content,
+  .playground .playground-grid .json-view-content,
+  .playground .playground-grid .timeline-content {
+    flex: 0 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .playground .playground-grid .tab-content,
+  .playground .playground-grid .moves-tables,
+  .playground .playground-grid .selection-block__scroll {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .playground .playground-grid .actions-scroll-area,
+  .playground .playground-grid .json-output {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .playground .playground-grid .map-container {
+    flex: 0 0 auto;
+    min-height: auto;
+  }
+
+  .playground .playground-grid .map-container--has-map {
+    min-height: clamp(320px, 52vw, 560px);
+  }
+}
+
+@media (max-width: 768px) {
+  .playground-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas: 
+      "game-engine"
+      "moves-table"
+      "game-map"
+      "selection"
+      "timeline";
+  }
+}

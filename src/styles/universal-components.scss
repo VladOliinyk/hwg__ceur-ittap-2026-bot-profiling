@@ -1,0 +1,863 @@
+/* Universal Component Styles
+   Reusable styles for common UI patterns across components */
+
+@use "sass:color";
+@use 'variables' as *;
+
+// ===========================================
+// PLACEHOLDER CONTENT PATTERNS
+// ===========================================
+
+// Base placeholder content - used for empty states
+.placeholder-content {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  text-align: center;
+  color: $text-secondary;
+  
+  .placeholder-icon {
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  h4,
+  .placeholder-title {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: $font-weight-medium;
+    line-height: 1.35;
+    color: $text-primary;
+  }
+  
+  p,
+  .placeholder-subtitle {
+    margin: 0;
+    font-size: 13px;
+    font-weight: $font-weight-normal;
+    line-height: 1.45;
+    color: $text-secondary;
+  }
+}
+
+// ===========================================
+// STATUS BADGES
+// ===========================================
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  display: inline-block;
+  
+  &.coming-soon {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+  }
+  
+  &.active {
+    background: $success-color;
+    color: white;
+  }
+  
+  &.inactive {
+    background: $disabled-background;
+    color: $disabled-color;
+  }
+  
+  &.warning {
+    background: $warning-color;
+    color: white;
+  }
+  
+  &.info {
+    background: $primary-light;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+}
+
+// ===========================================
+// BLOCK HEADERS
+// ===========================================
+
+// Standard block header pattern
+.block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px; /* Match tab button padding for consistent height */
+  border-bottom: 1px solid $border-light;
+  background: #f8f9fa;
+  
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    color: $text-primary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Block header with status
+.block-header-with-status {
+  @extend .block-header;
+  padding: 12px 16px; /* Match tab button padding for consistent height */
+  gap: 16px;
+  
+  .header-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+// ===========================================
+// CONTENT CONTAINERS
+// ===========================================
+
+// Standard content container
+.content-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+// Content container with specific layout
+.content-container-flex {
+  @extend .content-container;
+  flex-direction: column;
+}
+
+// ===========================================
+// FEATURE LISTS
+// ===========================================
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 200px;
+  
+  &.horizontal {
+    flex-direction: row;
+    max-width: none;
+    flex-wrap: wrap;
+  }
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background: $primary-light;
+    color: $primary-color;
+  }
+  
+  .feature-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  
+  .feature-text {
+    flex: 1;
+  }
+}
+
+// ===========================================
+// INFO CARDS & NOTES
+// ===========================================
+
+.info-card {
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  
+  h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: $text-primary;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: $text-muted;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    
+    &:hover {
+      background: #f0f0f0;
+      color: $text-primary;
+    }
+  }
+}
+
+.integration-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: $primary-light;
+  border-radius: 6px;
+  border: 1px solid $primary-color;
+  
+  .note-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: $primary-color;
+    line-height: 1.3;
+  }
+}
+
+// ===========================================
+// LOADING STATES
+// ===========================================
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: $text-muted;
+  padding: 40px 20px;
+  
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// ===========================================
+// NO DATA STATES
+// ===========================================
+
+.no-data-info {
+  text-align: center;
+  padding: 40px 20px;
+  color: $text-secondary;
+  
+  h4 {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: $font-weight-medium;
+    line-height: 1.35;
+    color: $text-primary;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: $text-secondary;
+  }
+}
+
+// ===========================================
+// TAB SYSTEM STYLES
+// ===========================================
+
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tab-header {
+  display: flex;
+  background: #f8f9fa;
+  border-bottom: 1px solid $border-light;
+  
+  .tab-button {
+    flex: 1;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: $font-weight-medium;
+    color: $text-muted;
+    transition: all $transition-fast;
+    border-bottom: 2px solid transparent;
+    
+    &:hover {
+      background: #e9ecef;
+      color: $text-primary;
+    }
+    
+    &.active {
+      color: $primary-color;
+      border-bottom-color: $primary-color;
+      background: white;
+    }
+    
+    &:first-child {
+      border-top-left-radius: $border-radius;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $border-radius;
+    }
+  }
+}
+
+.tab-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  
+  &.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-muted;
+  }
+}
+
+.default-tab-content {
+  text-align: center;
+  padding: 40px 20px;
+  color: $text-muted;
+  
+  h4 {
+    margin: 0 0 8px 0;
+    color: $text-primary;
+  }
+  
+  p {
+    margin: 0;
+  }
+}
+
+// ===========================================
+// CONTENT HEADERS
+// ===========================================
+
+.content-header {
+  margin-bottom: 16px;
+  
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+  }
+  
+  p {
+    margin: 0;
+    color: $text-muted;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+// ===========================================
+// STATISTICS & DATA DISPLAY
+// ===========================================
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid $border-light;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.stat-label {
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+}
+
+.stat-value {
+  color: $text-muted;
+  font-weight: $font-weight-medium;
+}
+
+// ===========================================
+// LEGEND SYSTEMS
+// ===========================================
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid $border-color;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  flex: 1;
+}
+
+.legend-count {
+  color: $text-muted;
+  font-size: 12px;
+}
+
+// ===========================================
+// FILE INPUT WRAPPER
+// ===========================================
+
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+  
+  input[type="file"] {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+}
+
+// ===========================================
+// GAME-SPECIFIC COMPONENTS
+// ===========================================
+
+// Game status and unit info blocks
+.game-status, .unit-info, .unit-actions {
+  margin: 12px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  
+  h4 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: $text-primary;
+  }
+  
+  h5 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    font-weight: $font-weight-bold;
+    color: $text-secondary;
+  }
+  
+  p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: $text-secondary;
+  }
+}
+
+// Action buttons container
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+// Action button styles
+.btn-action {
+  padding: 6px 10px;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  background-color: $primary-color;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &:hover:not(:disabled) {
+    background-color: color.adjust($primary-color, $lightness: -10%);
+    border-color: color.adjust($primary-color, $lightness: -10%);
+  }
+  
+  &:disabled {
+    background-color: $disabled-background;
+    border-color: $disabled-background;
+    cursor: not-allowed;
+  }
+}
+
+// Game controls container
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  
+  .btn-primary {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+// Unit dropdown styles
+.unit-dropdown {
+  position: fixed;
+  background: white;
+  border: 1px solid #33333371;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+.unit-dropdown-header {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  user-select: none;
+  
+  .drag-handle {
+    font-size: 14px;
+    color: #6c757d;
+    margin-right: 8px;
+    cursor: grab;
+    
+    &:active {
+      cursor: grabbing;
+    }
+  }
+  
+  h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      color: #dc3545;
+    }
+  }
+}
+
+.unit-info {
+  padding: 12px;
+  
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .label {
+      font-weight: bold;
+      color: #495057;
+      font-size: 12px;
+    }
+    
+    .value {
+      color: #333;
+      font-size: 12px;
+    }
+  }
+}
+
+.unit-actions {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .action-btn {
+    background: $primary-color;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+    
+    &:hover {
+      background: color.adjust($primary-color, $lightness: -10%);
+    }
+    
+    &.deselect {
+      background: #6c757d;
+      
+      &:hover {
+        background: #545b62;
+      }
+    }
+  }
+}
+
+// Rotation controls
+.rotation-controls {
+  display: flex;
+  gap: 6px;
+  
+  .action-btn {
+    flex: 1;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #ccc;
+      border-color: #ccc;
+      
+      &:hover {
+        background: #ccc;
+        border-color: #ccc;
+      }
+    }
+  }
+}
+
+// ===========================================
+// DEFAULT FILE INFO
+// ===========================================
+
+.default-file-info {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid $border-dark;
+  
+  h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: $text-primary;
+  }
+  
+  p {
+    margin: 0 0 12px 0;
+    font-size: 12px;
+    color: $text-muted;
+  }
+}
+
+// ===========================================
+// LAST LOADED INFO
+// ===========================================
+
+.last-loaded-info {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  
+  h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: $text-primary;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: $text-muted;
+  }
+  
+  &.success {
+    background: #e8f5e8;
+    
+    h4 {
+      color: $success-color;
+    }
+    
+    p {
+      color: $success-color;
+    }
+  }
+}
+
+// ===========================================
+// KEYBOARD CONTROLS INFO
+// ===========================================
+
+.keyboard-controls-info {
+  padding: 8px;
+  background: #f0f8ff;
+  border-radius: 4px;
+  border: 1px solid #b3d9ff;
+  
+  h6 {
+    margin: 0 0 6px 0;
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+  }
+  
+  .keyboard-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-size: 10px;
+    color: $text-secondary;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .key {
+      display: inline-block;
+      padding: 2px 6px;
+      background: #e9ecef;
+      border: 1px solid #adb5bd;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: bold;
+      color: #495057;
+      min-width: 16px;
+      text-align: center;
+    }
+  }
+}
+
+// ===========================================
+// FLOATING DROPDOWN SYSTEM
+// ===========================================
+
+// Base floating dropdown styles - универсальные для всех плавающих дропдаунов
+.floating-dropdown {
+  position: fixed;
+  background: white;
+  border: 1px solid #33333371;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
+  max-width: 300px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  
+  // Ensure dropdown stays within viewport
+  &.viewport-constrained {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+// Header with drag functionality
+.floating-dropdown-header {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  user-select: none;
+  
+  .drag-handle {
+    font-size: 14px;
+    color: #6c757d;
+    margin-right: 8px;
+    cursor: grab;
+    
+    &:active {
+      cursor: grabbing;
+    }
+  }
+  
+  h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      color: #dc3545;
+    }
+  }
+}
+
+// Main content area
+.floating-dropdown-content {
+  display: flex;
+  flex-direction: column;
+}

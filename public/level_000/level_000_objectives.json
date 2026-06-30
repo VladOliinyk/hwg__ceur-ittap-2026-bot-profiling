@@ -1,0 +1,9 @@
+{
+  "mode": "primaryBlue",
+  "primary": {
+    "id": "player1_eliminate_player2",
+    "type": "eliminateUnits",
+    "player": "player1",
+    "targetPlayer": "player2"
+  }
+}

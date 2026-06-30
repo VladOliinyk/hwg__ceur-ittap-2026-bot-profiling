@@ -1,0 +1,76 @@
+{
+  "player1": {
+    "units": [
+      {
+        "type": "infantry",
+        "name": "Infantry",
+        "health": 50,
+        "movement": 4,
+        "attackRange": 1,
+        "attackAngle": 1,
+        "attackPower": 30,
+        "maxTerrainDifficulty": 10,
+        "count": 2
+      },
+      {
+        "type": "armored",
+        "name": "Tank",
+        "health": 90,
+        "movement": 3,
+        "attackRange": 2,
+        "attackAngle": 1,
+        "attackPower": 45,
+        "maxTerrainDifficulty": 2,
+        "count": 1
+      },
+      {
+        "type": "artillery",
+        "name": "Artillery",
+        "health": 25,
+        "movement": 2,
+        "attackRange": 4,
+        "attackAngle": 0,
+        "attackPower": 90,
+        "maxTerrainDifficulty": 1,
+        "count": 1
+      }
+    ]
+  },
+  "player2": {
+    "units": [
+      {
+        "type": "infantry",
+        "name": "Infantry",
+        "health": 50,
+        "movement": 4,
+        "attackRange": 1,
+        "attackAngle": 1,
+        "attackPower": 30,
+        "maxTerrainDifficulty": 10,
+        "count": 3
+      },
+      {
+        "type": "armored",
+        "name": "Tank",
+        "health": 90,
+        "movement": 3,
+        "attackRange": 2,
+        "attackAngle": 1,
+        "attackPower": 45,
+        "maxTerrainDifficulty": 2,
+        "count": 2
+      },
+      {
+        "type": "artillery",
+        "name": "Artillery",
+        "health": 25,
+        "movement": 2,
+        "attackRange": 4,
+        "attackAngle": 0,
+        "attackPower": 90,
+        "maxTerrainDifficulty": 1,
+        "count": 0
+      }
+    ]
+  }
+}

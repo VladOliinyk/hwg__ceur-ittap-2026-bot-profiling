@@ -1,0 +1,139 @@
+// Shared presentation for unit label/value rows (dropdown + Game Engine).
+// Imported only from UnitInfoFields.vue
+
+@use 'variables' as *;
+
+.unit-info-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.unit-info-fields__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  min-width: 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.unit-info-fields__label {
+  font-weight: bold;
+  color: #495057;
+  font-size: 12px;
+  min-width: 0;
+}
+
+.unit-info-fields__value {
+  color: #333;
+  font-size: 12px;
+  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.unit-info-fields__value--progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.unit-progress {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.unit-progress__segment {
+  width: 12px;
+  height: 6px;
+  border-radius: 3px;
+  background: #dee2e6;
+}
+
+.unit-progress__segment.is-filled {
+  background: #28a745;
+}
+
+.unit-progress__text {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.unit-info-fields__value--weapon {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.unit-info-fields__value--weapon.is-loaded {
+  color: #2e7d32;
+}
+
+.unit-info-fields__value--weapon.is-empty {
+  color: #c62828;
+}
+
+// --- variant: floating (dropdown) — row layout aligned with SelectionInspectorPanel
+.unit-info-fields--dropdown {
+  .unit-info-fields__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .unit-info-fields__value--faction {
+    font-weight: bold;
+
+    &.player1 {
+      color: $primary-color;
+    }
+
+    &.player2 {
+      color: #dc3545;
+    }
+
+    &.faction-unknown {
+      color: #6c757d;
+    }
+  }
+}
+
+// --- variant: Game Engine panel (matches former .engine-kv__row in GameEngineBlock)
+.unit-info-fields--engine {
+  gap: 8px;
+
+  .unit-info-fields__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  .unit-info-fields__label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .unit-info-fields__value {
+    font-weight: 600;
+    color: #666;
+  }
+
+  .unit-info-fields__value--faction {
+    font-weight: 600;
+
+    &.player1 {
+      color: $primary-color;
+    }
+
+    &.player2 {
+      color: #dc3545;
+    }
+
+    &.faction-unknown {
+      color: #6c757d;
+    }
+  }
+}

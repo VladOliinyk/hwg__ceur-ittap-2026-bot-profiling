@@ -1,0 +1,121 @@
+@use 'variables' as *;
+
+@mixin action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+@mixin field-input {
+  padding: $input-padding;
+  border: $border-width solid $border-color;
+  border-radius: 4px;
+  background: $surface-color;
+  color: $text-primary;
+  font-family: monospace;
+  font-size: $font-size-medium;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+  }
+}
+
+@mixin seed-input {
+  @include field-input;
+
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  transition: border-color $transition-fast $transition-easing,
+              box-shadow $transition-fast $transition-easing;
+
+  &[readonly] {
+    background: $primary-light;
+    border-color: rgba($primary-color, 0.5);
+    cursor: text;
+  }
+}
+
+@mixin seed-lock-button {
+  flex: 0 0 38px;
+  width: 38px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: $border-width solid $border-color;
+  border-radius: 4px;
+  background: $surface-color;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: background-color $transition-fast $transition-easing,
+              border-color $transition-fast $transition-easing,
+              color $transition-fast $transition-easing,
+              box-shadow $transition-fast $transition-easing;
+
+  &:hover:not(:disabled) {
+    border-color: $primary-color;
+    color: $primary-color;
+    background-color: $primary-light;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin seed-lock-button-locked {
+  border-color: $primary-color;
+  background-color: $primary-light;
+  color: $primary-color;
+}
+
+@mixin action-button {
+  padding: 8px 18px;
+  border: $border-width solid $border-color;
+  border-radius: 6px;
+  background-color: $surface-color;
+  color: $text-primary;
+  font-size: $font-size-medium;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: background-color $transition-fast $transition-easing,
+              border-color $transition-fast $transition-easing;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-light;
+    border-color: $primary-color;
+  }
+
+  &:disabled {
+    background-color: $disabled-background;
+    color: $disabled-color;
+    border-color: $border-light;
+    cursor: not-allowed;
+  }
+}
+
+@mixin action-button-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: $surface-color;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+    border-color: $primary-hover;
+  }
+}
+
+@mixin action-button-playtest {
+  border-color: $primary-color;
+  color: $primary-color;
+  background-color: rgba($primary-color, 0.08);
+
+  &:hover:not(:disabled) {
+    background-color: rgba($primary-color, 0.14);
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "player": [
+    {
+      "title": "MANOEUVRE",
+      "comment": "How player moves.",
+      "moves": [
+        {
+          "title": "Normal (2x)",
+          "comment": "If units on plains/field (simple terrain)",
+          "dice": [
+            [
+              "reverse1"
+            ],
+            [
+              "turn"
+            ],
+            [
+              "turn"
+            ],
+            [
+              "turn"
+            ],
+            [
+              "move"
+            ],
+            [
+              "move"
+            ],
+            [
+              "turn",
+              "move"
+            ]
+          ]
+        },
+        {
+          "title": "Stunned (x1)",
+          "comment": "If units on mud/water/forest/etc. (complex terrain)",
+          "dice": [
+            [
+              "reverse2"
+            ],
+            [
+              "turn"
+            ],
+            [
+              "turn"
+            ],
+            [
+              "turn"
+            ],
+            [
+              "move"
+            ],
+            [
+              "move"
+            ],
+            [
+              "turn",
+              "move"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ATTACK",
+      "comment": "How player attacks.",
+      "moves": [
+        {
+          "title": "Normal (2x)",
+          "comment": "If units on plains/field (simple terrain)",
+          "dice": [
+            [
+              "load"
+            ],
+            [
+              "load"
+            ],
+            [
+              "load"
+            ],
+            [
+              "fire"
+            ],
+            [
+              "fire"
+            ],
+            [
+              "fire"
+            ],
+            [
+              "load",
+              "fire"
+            ]
+          ]
+        },
+        {
+          "title": "Stunned (x1)",
+          "comment": "If units on mud/water/forest/etc. (complex terrain)",
+          "dice": [
+            [
+              "load"
+            ],
+            [
+              "load"
+            ],
+            [
+              "load"
+            ],
+            [
+              "fire"
+            ],
+            [
+              "fire"
+            ],
+            [
+              "fire"
+            ],
+            [
+              "load",
+              "fire"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "enemy": [
+    {
+      "title": "Enemy operations",
+      "comment": "How enemy moves.",
+      "moves": [
+        {
+          "title": "Normal (2x)",
+          "comment": "If units on plains/field (simple terrain)",
+          "dice": [
+            [
+              "fire",
+              "turn"
+            ],
+            [
+              "fire",
+              "move"
+            ],
+            [
+              "fire",
+              "reverse"
+            ],
+            [
+              "move",
+              "turn"
+            ],
+            [
+              "move",
+              "turn"
+            ],
+            [
+              "move",
+              "reverse"
+            ]
+          ]
+        },
+        {
+          "title": "Stunned (x1)",
+          "comment": "If units on mud/water/forest/etc. (complex terrain)",
+          "dice": [
+            [
+              "fire",
+              "turn"
+            ],
+            [
+              "fire",
+              "move"
+            ],
+            [
+              "move",
+              "reverse"
+            ],
+            [
+              "move",
+              "reverse"
+            ],
+            [
+              "turn",
+              "turn"
+            ],
+            [
+              "turn",
+              "turn"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "Our_operations": [
+    {
+      "title": "MANOEUVRE",
+      "comment": "How player moves.",
+      "moves": [
+        {
+          "title": "On field – 2",
+          "comment": "If player on field",
+          "dice": [
+            ["reverse1"],
+            ["turn"],
+            ["turn"],
+            ["turn"],
+            ["move"],
+            ["move"],
+            ["turn","move"]
+          ]
+        },
+        {
+          "title": "On mud – 1",
+          "comment": "If player on mud.",
+          "dice": [
+            ["reverse2"],
+            ["turn"],
+            ["turn"],
+            ["turn"],
+            ["move"],
+            ["move"],
+            ["turn","move"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ATTACK",
+      "comment": "How player attacks.",
+      "moves": [
+        {
+          "title": "On field – 2",
+          "comment": "If player on field",
+          "dice": [
+            ["load"],
+            ["load"],
+            ["load"],
+            ["fire"],
+            ["fire"],
+            ["fire"],
+            ["load","fire"]
+          ]
+        },
+        {
+          "title": "On mud – 1",
+          "comment": "If player on mud.",
+          "dice": [
+            ["load"],
+            ["load"],
+            ["load"],
+            ["fire"],
+            ["fire"],
+            ["fire"],
+            ["load","fire"]
+          ]
+        }
+      ]
+    }
+  ],
+  "Enemy_operations": [
+    {
+      "title": "Enemy operations",
+      "comment": "How enemy moves.",
+      "moves": [
+        {
+          "title": "On field",
+          "comment": "If enemy on field.",
+          "dice": [
+            ["fire","turn"],
+            ["fire","move"],
+            ["fire","reverse"],
+            ["move","turn"],
+            ["move","turn"],
+            ["move","reverse"]
+          ]
+        },
+        {
+          "title": "On mud",
+          "comment": "If enemy on mud.",
+          "dice": [
+            ["fire","turn"],
+            ["fire","move"],
+            ["move","reverse"],
+            ["move","reverse"],
+            ["turn","turn"],
+            ["turn","turn"]
+          ]
+        }
+      ]
+    }
+  ]
+}
