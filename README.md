@@ -62,3 +62,23 @@ On Windows PowerShell, set the variables first:
 Every match uses a deterministic seed (`level_000-seed-k`, `k = 1…N`), so the run is
 byte-reproducible. The profiling harness lives in `src/domain/simulation/experiment*.js`,
 and the canonical runs are included under `experiments/` (`run-N1000/`, `run-N200/`).
+
+### Perceptual pilot (blind survey)
+
+```bash
+node survey/aggregate_survey.mjs
+```
+
+Aggregates the blind post-match cards (`survey/pilot_cards.csv`, N = 43) into the
+per-doctrine perceived aggressiveness and consistency reported in the paper (Fig. 4,
+Table 4).
+
+## What this artifact provides
+
+Backing the paper's reproducibility claims, this repository contains:
+
+- **The game level** — `public/level_000/`: a 5 × 8 hex board (40 cells; plains / forest / water), both players' bases and spawn rows, the unit roster (`level_000_units.json`), and the victory conditions (`level_000_objectives.json`).
+- **The seed rule** — every simulated match is seeded `level_000-seed-k` (`k = 1…N`); see `src/domain/simulation/experimentRunner.js`. The canonical runs are committed under `experiments/`.
+- **The five doctrines** — implemented under `src/domain/simulation/`: `strategies/heuristicStrategy.js` (aggressive / balanced / defensive via `orientationBias`), `experimentStrategies.js` (`cautious`), and `strategies/randomStrategy.js` (`random`), dispatched by `strategyProfiles.js`. Appendix A of the paper states the same five as prose rules.
+- **The behavioural metrics** — aggressiveness `A_m` and consistency `C` in `src/domain/simulation/experimentMetrics.js`.
+- **The perceptual-pilot data** — the blind survey cards (`survey/pilot_cards.csv`, N = 43) and the scoring script (`survey/aggregate_survey.mjs`), which reproduces the per-doctrine perceived profile behind Fig. 4 and Table 4.
